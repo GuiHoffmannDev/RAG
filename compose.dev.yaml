@@ -1,0 +1,14 @@
+# Development override: source mounted and API auto-reload.
+#   docker compose -f compose.yaml -f compose.dev.yaml up --build
+services:
+  api:
+    environment:
+      UVICORN_RELOAD: "true"
+      LANGFUSE_TRACING_ENVIRONMENT: development
+    volumes:
+      - ./src:/service/src
+      - ./configs:/service/configs
+      - ./assets/corpus:/service/assets/corpus
+  ui:
+    volumes:
+      - ./app:/service/app

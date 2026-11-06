@@ -1,0 +1,4 @@
+-r ../requirements.txt
+ragas==0.4.3
+# RAGAS 0.4 imports the legacy VertexAI adapter removed in 0.4.2.
+langchain-community==0.4.1

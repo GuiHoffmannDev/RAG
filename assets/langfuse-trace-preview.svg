@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="124" viewBox="0 0 960 124" role="img" aria-labelledby="title">
+  <title id="title">Screenshot placeholder for a Langfuse trace of the rag-graph run</title>
+  <rect width="960" height="124" rx="12" fill="#113c38"/>
+  <g transform="translate(30 26)" stroke="#a7dcb2" stroke-width="2" fill="none">
+    <rect width="108" height="72" rx="6"/><path d="M14 18h80M26 32h68M26 46h54M38 60h56"/>
+  </g>
+  <g font-family="system-ui, sans-serif" fill="#f4f6ed">
+    <text x="165" y="56" font-size="23">Langfuse trace</text>
+    <text x="165" y="84" fill="#c3dcd1" font-size="16">Screenshot placeholder · rag-graph nodes, grader verdicts, tokens and cost</text>
+  </g>
+</svg>

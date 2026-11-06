@@ -1,0 +1,29 @@
+# Secrets (only the template is tracked)
+.env
+.env.*
+!.env.example
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# Tooling caches
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Notebooks and local runs
+.ipynb_checkpoints/
+runs/
+
+# Editors and OS
+.DS_Store
+.idea/
+.vscode/

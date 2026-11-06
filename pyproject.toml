@@ -1,0 +1,42 @@
+[project]
+name = "agentic-corrective-rag"
+version = "0.1.0"
+description = "Evidence-graded hybrid retrieval with bounded query correction"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "GuiHoffmannDev" }]
+requires-python = ">=3.11"
+dynamic = ["dependencies"]
+
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src", "src.*", "configs"]
+
+[tool.setuptools.package-data]
+configs = ["*.toml"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.coverage.run]
+source = ["src"]
+branch = true
+
+[tool.coverage.report]
+# Measured 79% without the Qdrant integration test (TEST_QDRANT_URL unset). Raise as coverage grows.
+fail_under = 75
+show_missing = true
+skip_covered = true
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100

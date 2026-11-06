@@ -1,0 +1,5 @@
+# Automatic HTTPS for the Streamlit UI. The API stays on the internal network.
+{$DOMAIN} {
+	encode zstd gzip
+	reverse_proxy ui:8501
+}

@@ -1,0 +1,2418 @@
+{
+  "label": "majority-v1 (current)",
+  "cases_sha256": "5550e8dc5c945e55f053bdefd4cf34b5aba601ec2536a3ce8f4ca09085254c5c",
+  "case_count": 26,
+  "snapshot": "runbook_ollama-58fc93456bcc41b5a626d759027ec6c6",
+  "settings": {
+    "model_provider": "ollama",
+    "chat_model": "qwen3.5:4b",
+    "additional_chat_models": "",
+    "embedding_model": "qwen3-embedding:0.6b",
+    "qdrant_api_key": null,
+    "collection": "runbook_ollama",
+    "candidate_depth": 12,
+    "top_k": 4,
+    "max_rewrites": 2,
+    "grade_rule": "majority",
+    "grader_prompt": "v1",
+    "grader_model": null,
+    "chunk_size": 1200,
+    "chunk_overlap": 200,
+    "chat_input_usd_per_million": null,
+    "chat_output_usd_per_million": null,
+    "embedding_usd_per_million": null
+  },
+  "judge_provider": "ollama",
+  "judge_model": "qwen3.5:4b",
+  "judge_embedding_model": "qwen3-embedding:0.6b",
+  "ragas_version": "0.4.3",
+  "summary": {
+    "faithfulness": {
+      "baseline": 0.90625,
+      "corrective": 0.8645833333333334,
+      "delta": -0.04166666666666663,
+      "n_pairs": 16
+    },
+    "answer_relevancy": {
+      "baseline": 0.8084640872235276,
+      "corrective": 0.7910977480656323,
+      "delta": -0.017366339157895316,
+      "n_pairs": 16
+    },
+    "context_precision": {
+      "baseline": 0.95833333325625,
+      "corrective": 0.96874999990625,
+      "delta": 0.010416666649999962,
+      "n_pairs": 16
+    },
+    "context_recall": {
+      "baseline": 0.9375,
+      "corrective": 0.921875,
+      "delta": -0.015625,
+      "n_pairs": 16
+    },
+    "answer_coverage": {
+      "baseline": 1.0,
+      "corrective": 1.0,
+      "delta": 0.0,
+      "n_pairs": 16
+    }
+  },
+  "breakdown": {
+    "baseline": {
+      "unanswerable": 10,
+      "correct_abstention": 4,
+      "hallucination": 6,
+      "answerable": 16,
+      "false_abstention": 0
+    },
+    "corrective": {
+      "unanswerable": 8,
+      "correct_abstention": 3,
+      "hallucination": 5,
+      "answerable": 16,
+      "false_abstention": 0
+    },
+    "rewrite_causes": {
+      "below_threshold": 38,
+      "zero_relevant": 7
+    }
+  },
+  "cases": [
+    {
+      "question": "An archive upload returns ARC-17. Which two values disagree?",
+      "answerable": true,
+      "ground_truth": "The checksum of the archive differs from the checksum recorded in the uploaded manifest.",
+      "gold_sources": [
+        "errors.md"
+      ],
+      "contexts": [],
+      "system": "baseline",
+      "latency_s": 3.5141337499953806,
+      "observability": {
+        "latency_s": 3.5141337499953806,
+        "input_tokens": 323,
+        "output_tokens": 31,
+        "embedding_tokens": 15,
+        "total_tokens": 369,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "ARC-17 means the archive checksum differs from the uploaded manifest. [1]",
+        "citations": [
+          {
+            "source": "errors.md",
+            "chunk": 1,
+            "text": "# Archive service error codes\n\nARC-17 means the archive checksum differs from the uploaded manifest. Quarantine the upload, recompute the checksum from the original file, and submit a corrected manifest before retrying.\n\nARC-42 means the account has reached its concurrent export limit. Wait for an active export to finish before starting another.",
+            "score": 1.0,
+            "label": 1
+          }
+        ],
+        "abstained": false,
+        "rewrites": 0
+      },
+      "errors": {},
+      "outcome": "answered",
+      "rewrite_causes": [],
+      "metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.733285923398696,
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_coverage": 1.0
+      }
+    },
+    {
+      "question": "An archive upload returns ARC-17. Which two values disagree?",
+      "answerable": true,
+      "ground_truth": "The checksum of the archive differs from the checksum recorded in the uploaded manifest.",
+      "gold_sources": [
+        "errors.md"
+      ],
+      "contexts": [],
+      "system": "corrective",
+      "latency_s": 13.910501459031366,
+      "observability": {
+        "latency_s": 13.910501459031366,
+        "input_tokens": 1397,
+        "output_tokens": 327,
+        "embedding_tokens": 41,
+        "total_tokens": 1765,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "The two values that disagree are the archive checksum and the uploaded manifest. [1]",
+        "citations": [
+          {
+            "source": "errors.md",
+            "chunk": 1,
+            "text": "# Archive service error codes\n\nARC-17 means the archive checksum differs from the uploaded manifest. Quarantine the upload, recompute the checksum from the original file, and submit a corrected manifest before retrying.\n\nARC-42 means the account has reached its concurrent export limit. Wait for an active export to finish before starting another.",
+            "score": 1.0,
+            "label": 1
+          }
+        ],
+        "abstained": false,
+        "rewrites": 2
+      },
+      "errors": {},
+      "outcome": "answered",
+      "rewrite_causes": [
+        "below_threshold",
+        "below_threshold"
+      ],
+      "metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.5678909693309796,
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_coverage": 1.0
+      }
+    },
+    {
+      "question": "An operator sees ARC-17 and plans to retry the upload immediately. What should happen first, and in what order?",
+      "answerable": true,
+      "ground_truth": "Quarantine the upload, recompute its checksum from the original file, then submit a corrected manifest before retrying.",
+      "gold_sources": [
+        "errors.md"
+      ],
+      "contexts": [],
+      "system": "baseline",
+      "latency_s": 2.82839358295314,
+      "observability": {
+        "latency_s": 2.82839358295314,
+        "input_tokens": 334,
+        "output_tokens": 73,
+        "embedding_tokens": 26,
+        "total_tokens": 433,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "The operator should first quarantine the upload. [1] Next, the operator must recompute the checksum from the original file. [1] Then, the operator should submit a corrected manifest. [1]",
+        "citations": [
+          {
+            "source": "errors.md",
+            "chunk": 1,
+            "text": "# Archive service error codes\n\nARC-17 means the archive checksum differs from the uploaded manifest. Quarantine the upload, recompute the checksum from the original file, and submit a corrected manifest before retrying.\n\nARC-42 means the account has reached its concurrent export limit. Wait for an active export to finish before starting another.",
+            "score": 1.0,
+            "label": 1
+          }
+        ],
+        "abstained": false,
+        "rewrites": 0
+      },
+      "errors": {},
+      "outcome": "answered",
+      "rewrite_causes": [],
+      "metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.7882740394021978,
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_coverage": 1.0
+      }
+    },
+    {
+      "question": "An operator sees ARC-17 and plans to retry the upload immediately. What should happen first, and in what order?",
+      "answerable": true,
+      "ground_truth": "Quarantine the upload, recompute its checksum from the original file, then submit a corrected manifest before retrying.",
+      "gold_sources": [
+        "errors.md"
+      ],
+      "contexts": [],
+      "system": "corrective",
+      "latency_s": 13.540030292002484,
+      "observability": {
+        "latency_s": 13.540030292002484,
+        "input_tokens": 1477,
+        "output_tokens": 349,
+        "embedding_tokens": 57,
+        "total_tokens": 1883,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "The operator should first quarantine the upload, then recompute the checksum from the original file, and finally submit a corrected manifest before retrying. [1]",
+        "citations": [
+          {
+            "source": "errors.md",
+            "chunk": 1,
+            "text": "# Archive service error codes\n\nARC-17 means the archive checksum differs from the uploaded manifest. Quarantine the upload, recompute the checksum from the original file, and submit a corrected manifest before retrying.\n\nARC-42 means the account has reached its concurrent export limit. Wait for an active export to finish before starting another.",
+            "score": 1.0,
+            "label": 1
+          }
+        ],
+        "abstained": false,
+        "rewrites": 2
+      },
+      "errors": {},
+      "outcome": "answered",
+      "rewrite_causes": [
+        "below_threshold",
+        "below_threshold"
+      ],
+      "metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.7882740394021978,
+        "context_precision": 0.9999999999,
+        "context_recall": 0.6666666666666666,
+        "answer_coverage": 1.0
+      }
+    },
+    {
+      "question": "Both export slots are busy. Which error should I expect when starting another job, and when should I retry?",
+      "answerable": true,
+      "ground_truth": "Expect ARC-42 because the concurrent export limit has been reached. Wait for an active export to finish before starting another.",
+      "gold_sources": [
+        "errors.md",
+        "export.md"
+      ],
+      "contexts": [],
+      "system": "baseline",
+      "latency_s": 2.826914875069633,
+      "observability": {
+        "latency_s": 2.826914875069633,
+        "input_tokens": 331,
+        "output_tokens": 49,
+        "embedding_tokens": 23,
+        "total_tokens": 403,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "The error you should expect is ARC-42. [1] You should retry when an active export finishes. [1]",
+        "citations": [
+          {
+            "source": "errors.md",
+            "chunk": 1,
+            "text": "# Archive service error codes\n\nARC-17 means the archive checksum differs from the uploaded manifest. Quarantine the upload, recompute the checksum from the original file, and submit a corrected manifest before retrying.\n\nARC-42 means the account has reached its concurrent export limit. Wait for an active export to finish before starting another.",
+            "score": 0.8333334,
+            "label": 1
+          }
+        ],
+        "abstained": false,
+        "rewrites": 0
+      },
+      "errors": {},
+      "outcome": "answered",
+      "rewrite_causes": [],
+      "metrics": {
+        "faithfulness": 0.5,
+        "answer_relevancy": 0.5830703709421455,
+        "context_precision": 0.99999999995,
+        "context_recall": 1.0,
+        "answer_coverage": 1.0
+      }
+    },
+    {
+      "question": "Both export slots are busy. Which error should I expect when starting another job, and when should I retry?",
+      "answerable": true,
+      "ground_truth": "Expect ARC-42 because the concurrent export limit has been reached. Wait for an active export to finish before starting another.",
+      "gold_sources": [
+        "errors.md",
+        "export.md"
+      ],
+      "contexts": [],
+      "system": "corrective",
+      "latency_s": 12.58546887501143,
+      "observability": {
+        "latency_s": 12.58546887501143,
+        "input_tokens": 1451,
+        "output_tokens": 257,
+        "embedding_tokens": 46,
+        "total_tokens": 1754,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "The error you should expect is ARC-42, which means the account has reached its concurrent export limit. [1] You should retry when an active export finishes. [1]",
+        "citations": [
+          {
+            "source": "errors.md",
+            "chunk": 1,
+            "text": "# Archive service error codes\n\nARC-17 means the archive checksum differs from the uploaded manifest. Quarantine the upload, recompute the checksum from the original file, and submit a corrected manifest before retrying.\n\nARC-42 means the account has reached its concurrent export limit. Wait for an active export to finish before starting another.",
+            "score": 0.8333334,
+            "label": 1
+          }
+        ],
+        "abstained": false,
+        "rewrites": 2
+      },
+      "errors": {},
+      "outcome": "answered",
+      "rewrite_causes": [
+        "below_threshold",
+        "below_threshold"
+      ],
+      "metrics": {
+        "faithfulness": 0.3333333333333333,
+        "answer_relevancy": 0.6813773726865783,
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_coverage": 1.0
+      }
+    },
+    {
+      "question": "Is the export cap a lifetime limit of two jobs, or can our workspace launch a third after one finishes?",
+      "answerable": true,
+      "ground_truth": "A workspace may run two exports concurrently. Once one finishes, a slot becomes available and the third job can start.",
+      "gold_sources": [
+        "export.md"
+      ],
+      "contexts": [],
+      "system": "baseline",
+      "latency_s": 2.166993041988462,
+      "observability": {
+        "latency_s": 2.166993041988462,
+        "input_tokens": 331,
+        "output_tokens": 40,
+        "embedding_tokens": 23,
+        "total_tokens": 394,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "The export cap is a limit of two concurrent exports, requiring you to wait for one to finish before starting another. [1]",
+        "citations": [
+          {
+            "source": "errors.md",
+            "chunk": 1,
+            "text": "# Archive service error codes\n\nARC-17 means the archive checksum differs from the uploaded manifest. Quarantine the upload, recompute the checksum from the original file, and submit a corrected manifest before retrying.\n\nARC-42 means the account has reached its concurrent export limit. Wait for an active export to finish before starting another.",
+            "score": 0.8333334,
+            "label": 1
+          }
+        ],
+        "abstained": false,
+        "rewrites": 0
+      },
+      "errors": {},
+      "outcome": "answered",
+      "rewrite_causes": [],
+      "metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.7558829962234498,
+        "context_precision": 0.99999999995,
+        "context_recall": 0.5,
+        "answer_coverage": 1.0
+      }
+    },
+    {
+      "question": "Is the export cap a lifetime limit of two jobs, or can our workspace launch a third after one finishes?",
+      "answerable": true,
+      "ground_truth": "A workspace may run two exports concurrently. Once one finishes, a slot becomes available and the third job can start.",
+      "gold_sources": [
+        "export.md"
+      ],
+      "contexts": [],
+      "system": "corrective",
+      "latency_s": 4.524598416057415,
+      "observability": {
+        "latency_s": 4.524598416057415,
+        "input_tokens": 591,
+        "output_tokens": 95,
+        "embedding_tokens": 23,
+        "total_tokens": 709,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "The account has reached its concurrent export limit, which is two jobs. [1]",
+        "citations": [
+          {
+            "source": "errors.md",
+            "chunk": 1,
+            "text": "# Archive service error codes\n\nARC-17 means the archive checksum differs from the uploaded manifest. Quarantine the upload, recompute the checksum from the original file, and submit a corrected manifest before retrying.\n\nARC-42 means the account has reached its concurrent export limit. Wait for an active export to finish before starting another.",
+            "score": 0.8333334,
+            "label": 1
+          }
+        ],
+        "abstained": false,
+        "rewrites": 0
+      },
+      "errors": {},
+      "outcome": "answered",
+      "rewrite_causes": [],
+      "metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.673525198922278,
+        "context_precision": 0.99999999995,
+        "context_recall": 1.0,
+        "answer_coverage": 1.0
+      }
+    },
+    {
+      "question": "A completed export link is 49 hours old. How do I get a working download?",
+      "answerable": true,
+      "ground_truth": "Completed export links expire after 48 hours. Generate a new export to obtain a fresh link.",
+      "gold_sources": [
+        "export.md"
+      ],
+      "contexts": [],
+      "system": "baseline",
+      "latency_s": 1.4544282499700785,
+      "observability": {
+        "latency_s": 1.4544282499700785,
+        "input_tokens": 328,
+        "output_tokens": 27,
+        "embedding_tokens": 20,
+        "total_tokens": 375,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "Generate a new export when a download link expires. [1]",
+        "citations": [
+          {
+            "source": "export.md",
+            "chunk": 1,
+            "text": "# Exports\n\nA workspace may run two exports concurrently. Completed export links expire after 48 hours. Generate a new export when a download link expires.",
+            "score": 1.0,
+            "label": 1
+          }
+        ],
+        "abstained": false,
+        "rewrites": 0
+      },
+      "errors": {},
+      "outcome": "answered",
+      "rewrite_causes": [],
+      "metrics": {
+        "faithfulness": 0.5,
+        "answer_relevancy": 0.7488735380401849,
+        "context_precision": 0.99999999995,
+        "context_recall": 1.0,
+        "answer_coverage": 1.0
+      }
+    },
+    {
+      "question": "A completed export link is 49 hours old. How do I get a working download?",
+      "answerable": true,
+      "ground_truth": "Completed export links expire after 48 hours. Generate a new export to obtain a fresh link.",
+      "gold_sources": [
+        "export.md"
+      ],
+      "contexts": [],
+      "system": "corrective",
+      "latency_s": 17.115359458024614,
+      "observability": {
+        "latency_s": 17.115359458024614,
+        "input_tokens": 1396,
+        "output_tokens": 360,
+        "embedding_tokens": 80,
+        "total_tokens": 1836,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "Completed export links expire after 48 hours. [1]",
+        "citations": [
+          {
+            "source": "export.md",
+            "chunk": 1,
+            "text": "# Exports\n\nA workspace may run two exports concurrently. Completed export links expire after 48 hours. Generate a new export when a download link expires.",
+            "score": 1.0,
+            "label": 1
+          }
+        ],
+        "abstained": false,
+        "rewrites": 2
+      },
+      "errors": {},
+      "outcome": "answered",
+      "rewrite_causes": [
+        "below_threshold",
+        "below_threshold"
+      ],
+      "metrics": {
+        "faithfulness": 0.5,
+        "answer_relevancy": 0.8326854310944699,
+        "context_precision": 0.9999999999,
+        "context_recall": 0.75,
+        "answer_coverage": 1.0
+      }
+    },
+    {
+      "question": "I have an expired export link and both workspace export slots are occupied. How do I obtain a replacement?",
+      "answerable": true,
+      "ground_truth": "Wait for an active export to finish, then generate a new export because the old download link has expired.",
+      "gold_sources": [
+        "errors.md",
+        "export.md"
+      ],
+      "contexts": [],
+      "system": "baseline",
+      "latency_s": 4.0327975830296054,
+      "observability": {
+        "latency_s": 4.0327975830296054,
+        "input_tokens": 330,
+        "output_tokens": 76,
+        "embedding_tokens": 22,
+        "total_tokens": 428,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "A completed export link expires after 48 hours. [1] Generate a new export when a download link expires. [1]",
+        "citations": [
+          {
+            "source": "export.md",
+            "chunk": 1,
+            "text": "# Exports\n\nA workspace may run two exports concurrently. Completed export links expire after 48 hours. Generate a new export when a download link expires.",
+            "score": 1.0,
+            "label": 1
+          }
+        ],
+        "abstained": false,
+        "rewrites": 0
+      },
+      "errors": {},
+      "outcome": "answered",
+      "rewrite_causes": [],
+      "metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.7989511499912245,
+        "context_precision": 0.99999999995,
+        "context_recall": 0.6666666666666666,
+        "answer_coverage": 1.0
+      }
+    },
+    {
+      "question": "I have an expired export link and both workspace export slots are occupied. How do I obtain a replacement?",
+      "answerable": true,
+      "ground_truth": "Wait for an active export to finish, then generate a new export because the old download link has expired.",
+      "gold_sources": [
+        "errors.md",
+        "export.md"
+      ],
+      "contexts": [],
+      "system": "corrective",
+      "latency_s": 15.707216292037629,
+      "observability": {
+        "latency_s": 15.707216292037629,
+        "input_tokens": 1408,
+        "output_tokens": 348,
+        "embedding_tokens": 48,
+        "total_tokens": 1804,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "Generate a new export when a download link expires. [1]",
+        "citations": [
+          {
+            "source": "export.md",
+            "chunk": 1,
+            "text": "# Exports\n\nA workspace may run two exports concurrently. Completed export links expire after 48 hours. Generate a new export when a download link expires.",
+            "score": 1.0,
+            "label": 1
+          }
+        ],
+        "abstained": false,
+        "rewrites": 2
+      },
+      "errors": {},
+      "outcome": "answered",
+      "rewrite_causes": [
+        "below_threshold",
+        "below_threshold"
+      ],
+      "metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.6315953136307195,
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_coverage": 1.0
+      }
+    },
+    {
+      "question": "Who can restore a deleted archive, and where in the workspace do they do it?",
+      "answerable": true,
+      "ground_truth": "A workspace administrator can restore it from the Recovery tab during the 14-calendar-day recovery window.",
+      "gold_sources": [
+        "retention.md"
+      ],
+      "contexts": [],
+      "system": "baseline",
+      "latency_s": 1.946457291021943,
+      "observability": {
+        "latency_s": 1.946457291021943,
+        "input_tokens": 326,
+        "output_tokens": 45,
+        "embedding_tokens": 18,
+        "total_tokens": 389,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "A workspace administrator can restore an archive from the Recovery tab. [1]",
+        "citations": [
+          {
+            "source": "retention.md",
+            "chunk": 1,
+            "text": "# Archive recovery policy\n\nDeleted archives stay in the recovery queue for 14 calendar days. During that window, a workspace administrator can restore an archive from the Recovery tab. After the window closes, the service permanently removes the archived object.",
+            "score": 1.0,
+            "label": 1
+          }
+        ],
+        "abstained": false,
+        "rewrites": 0
+      },
+      "errors": {},
+      "outcome": "answered",
+      "rewrite_causes": [],
+      "metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.881554395616681,
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_coverage": 1.0
+      }
+    },
+    {
+      "question": "Who can restore a deleted archive, and where in the workspace do they do it?",
+      "answerable": true,
+      "ground_truth": "A workspace administrator can restore it from the Recovery tab during the 14-calendar-day recovery window.",
+      "gold_sources": [
+        "retention.md"
+      ],
+      "contexts": [],
+      "system": "corrective",
+      "latency_s": 15.897634124965407,
+      "observability": {
+        "latency_s": 15.897634124965407,
+        "input_tokens": 1421,
+        "output_tokens": 322,
+        "embedding_tokens": 73,
+        "total_tokens": 1816,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "A workspace administrator can restore an archive. [1] They do it in the Recovery tab. [1]",
+        "citations": [
+          {
+            "source": "retention.md",
+            "chunk": 1,
+            "text": "# Archive recovery policy\n\nDeleted archives stay in the recovery queue for 14 calendar days. During that window, a workspace administrator can restore an archive from the Recovery tab. After the window closes, the service permanently removes the archived object.",
+            "score": 1.0,
+            "label": 1
+          }
+        ],
+        "abstained": false,
+        "rewrites": 2
+      },
+      "errors": {},
+      "outcome": "answered",
+      "rewrite_causes": [
+        "below_threshold",
+        "below_threshold"
+      ],
+      "metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.881554395616681,
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_coverage": 1.0
+      }
+    },
+    {
+      "question": "A workspace administrator discovers an accidental deletion ten calendar days later. Can they recover the archive, and how?",
+      "answerable": true,
+      "ground_truth": "Yes. Ten days is within the 14-calendar-day window. The administrator can restore the archive from the Recovery tab.",
+      "gold_sources": [
+        "retention.md"
+      ],
+      "contexts": [],
+      "system": "baseline",
+      "latency_s": 4.695866083027795,
+      "observability": {
+        "latency_s": 4.695866083027795,
+        "input_tokens": 330,
+        "output_tokens": 84,
+        "embedding_tokens": 22,
+        "total_tokens": 436,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "The administrator can recover the archive because it is within the 14-day recovery window. [1] The administrator can restore the archive from the Recovery tab. [1]",
+        "citations": [
+          {
+            "source": "retention.md",
+            "chunk": 1,
+            "text": "# Archive recovery policy\n\nDeleted archives stay in the recovery queue for 14 calendar days. During that window, a workspace administrator can restore an archive from the Recovery tab. After the window closes, the service permanently removes the archived object.",
+            "score": 1.0,
+            "label": 1
+          }
+        ],
+        "abstained": false,
+        "rewrites": 0
+      },
+      "errors": {},
+      "outcome": "answered",
+      "rewrite_causes": [],
+      "metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.8070663377499,
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_coverage": 1.0
+      }
+    },
+    {
+      "question": "A workspace administrator discovers an accidental deletion ten calendar days later. Can they recover the archive, and how?",
+      "answerable": true,
+      "ground_truth": "Yes. Ten days is within the 14-calendar-day window. The administrator can restore the archive from the Recovery tab.",
+      "gold_sources": [
+        "retention.md"
+      ],
+      "contexts": [],
+      "system": "corrective",
+      "latency_s": 14.002087709028274,
+      "observability": {
+        "latency_s": 14.002087709028274,
+        "input_tokens": 1426,
+        "output_tokens": 265,
+        "embedding_tokens": 50,
+        "total_tokens": 1741,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "Yes, the administrator can recover the archive. [1] The administrator can restore an archive from the Recovery tab. [1]",
+        "citations": [
+          {
+            "source": "retention.md",
+            "chunk": 1,
+            "text": "# Archive recovery policy\n\nDeleted archives stay in the recovery queue for 14 calendar days. During that window, a workspace administrator can restore an archive from the Recovery tab. After the window closes, the service permanently removes the archived object.",
+            "score": 1.0,
+            "label": 1
+          }
+        ],
+        "abstained": false,
+        "rewrites": 2
+      },
+      "errors": {},
+      "outcome": "answered",
+      "rewrite_causes": [
+        "below_threshold",
+        "below_threshold"
+      ],
+      "metrics": {
+        "faithfulness": 0.5,
+        "answer_relevancy": 0.8440908417030298,
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_coverage": 1.0
+      }
+    },
+    {
+      "question": "An archive was deleted 16 calendar days ago. What has happened to the archived object?",
+      "answerable": true,
+      "ground_truth": "The 14-calendar-day recovery window has closed, and the service permanently removes the archived object after that window.",
+      "gold_sources": [
+        "retention.md"
+      ],
+      "contexts": [],
+      "system": "baseline",
+      "latency_s": 2.5313893751008436,
+      "observability": {
+        "latency_s": 2.5313893751008436,
+        "input_tokens": 328,
+        "output_tokens": 41,
+        "embedding_tokens": 20,
+        "total_tokens": 389,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "The service permanently removes the archived object. [1]",
+        "citations": [
+          {
+            "source": "retention.md",
+            "chunk": 1,
+            "text": "# Archive recovery policy\n\nDeleted archives stay in the recovery queue for 14 calendar days. During that window, a workspace administrator can restore an archive from the Recovery tab. After the window closes, the service permanently removes the archived object.",
+            "score": 1.0,
+            "label": 1
+          }
+        ],
+        "abstained": false,
+        "rewrites": 0
+      },
+      "errors": {},
+      "outcome": "answered",
+      "rewrite_causes": [],
+      "metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.8121978323414125,
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_coverage": 1.0
+      }
+    },
+    {
+      "question": "An archive was deleted 16 calendar days ago. What has happened to the archived object?",
+      "answerable": true,
+      "ground_truth": "The 14-calendar-day recovery window has closed, and the service permanently removes the archived object after that window.",
+      "gold_sources": [
+        "retention.md"
+      ],
+      "contexts": [],
+      "system": "corrective",
+      "latency_s": 16.05958175007254,
+      "observability": {
+        "latency_s": 16.05958175007254,
+        "input_tokens": 1411,
+        "output_tokens": 322,
+        "embedding_tokens": 46,
+        "total_tokens": 1779,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "The service permanently removes the archived object. [1]",
+        "citations": [
+          {
+            "source": "retention.md",
+            "chunk": 1,
+            "text": "# Archive recovery policy\n\nDeleted archives stay in the recovery queue for 14 calendar days. During that window, a workspace administrator can restore an archive from the Recovery tab. After the window closes, the service permanently removes the archived object.",
+            "score": 1.0,
+            "label": 1
+          }
+        ],
+        "abstained": false,
+        "rewrites": 2
+      },
+      "errors": {},
+      "outcome": "answered",
+      "rewrite_causes": [
+        "below_threshold",
+        "below_threshold"
+      ],
+      "metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.8121978323414125,
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_coverage": 1.0
+      }
+    },
+    {
+      "question": "Does a weekend pause the countdown for restoring a deleted archive?",
+      "answerable": true,
+      "ground_truth": "No. The recovery queue retains deleted archives for 14 calendar days, so weekends count.",
+      "gold_sources": [
+        "retention.md"
+      ],
+      "contexts": [],
+      "system": "baseline",
+      "latency_s": 1.7954335829708725,
+      "observability": {
+        "latency_s": 1.7954335829708725,
+        "input_tokens": 321,
+        "output_tokens": 37,
+        "embedding_tokens": 13,
+        "total_tokens": 371,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "Deleted archives stay in the recovery queue for 14 calendar days. [1]",
+        "citations": [
+          {
+            "source": "retention.md",
+            "chunk": 1,
+            "text": "# Archive recovery policy\n\nDeleted archives stay in the recovery queue for 14 calendar days. During that window, a workspace administrator can restore an archive from the Recovery tab. After the window closes, the service permanently removes the archived object.",
+            "score": 1.0,
+            "label": 1
+          }
+        ],
+        "abstained": false,
+        "rewrites": 0
+      },
+      "errors": {},
+      "outcome": "answered",
+      "rewrite_causes": [],
+      "metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.8436263139658636,
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_coverage": 1.0
+      }
+    },
+    {
+      "question": "Does a weekend pause the countdown for restoring a deleted archive?",
+      "answerable": true,
+      "ground_truth": "No. The recovery queue retains deleted archives for 14 calendar days, so weekends count.",
+      "gold_sources": [
+        "retention.md"
+      ],
+      "contexts": [],
+      "system": "corrective",
+      "latency_s": 18.806716833030805,
+      "observability": {
+        "latency_s": 18.806716833030805,
+        "input_tokens": 1404,
+        "output_tokens": 397,
+        "embedding_tokens": 92,
+        "total_tokens": 1893,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "A weekend does not pause the countdown for restoring a deleted archive because the recovery queue duration is defined as 14 calendar days. [1]",
+        "citations": [
+          {
+            "source": "retention.md",
+            "chunk": 1,
+            "text": "# Archive recovery policy\n\nDeleted archives stay in the recovery queue for 14 calendar days. During that window, a workspace administrator can restore an archive from the Recovery tab. After the window closes, the service permanently removes the archived object.",
+            "score": 1.0,
+            "label": 1
+          }
+        ],
+        "abstained": false,
+        "rewrites": 2
+      },
+      "errors": {},
+      "outcome": "answered",
+      "rewrite_causes": [
+        "below_threshold",
+        "below_threshold"
+      ],
+      "metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9999999999999997,
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_coverage": 1.0
+      }
+    },
+    {
+      "question": "How do the time limits for downloading a finished export and recovering a deleted archive differ?",
+      "answerable": true,
+      "ground_truth": "A completed export link expires after 48 hours. A deleted archive stays in the recovery queue for 14 calendar days.",
+      "gold_sources": [
+        "export.md",
+        "retention.md"
+      ],
+      "contexts": [],
+      "system": "baseline",
+      "latency_s": 4.097936375066638,
+      "observability": {
+        "latency_s": 4.097936375066638,
+        "input_tokens": 326,
+        "output_tokens": 86,
+        "embedding_tokens": 18,
+        "total_tokens": 430,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "The time limit for downloading a finished export is 48 hours. [1] The time limit for recovering a deleted archive is 14 calendar days. [2]",
+        "citations": [
+          {
+            "source": "export.md",
+            "chunk": 1,
+            "text": "# Exports\n\nA workspace may run two exports concurrently. Completed export links expire after 48 hours. Generate a new export when a download link expires.",
+            "score": 0.8333334,
+            "label": 1
+          },
+          {
+            "source": "retention.md",
+            "chunk": 1,
+            "text": "# Archive recovery policy\n\nDeleted archives stay in the recovery queue for 14 calendar days. During that window, a workspace administrator can restore an archive from the Recovery tab. After the window closes, the service permanently removes the archived object.",
+            "score": 0.5833334,
+            "label": 2
+          }
+        ],
+        "abstained": false,
+        "rewrites": 0
+      },
+      "errors": {},
+      "outcome": "answered",
+      "rewrite_causes": [],
+      "metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9872565021107076,
+        "context_precision": 0.3333333333,
+        "context_recall": 1.0,
+        "answer_coverage": 1.0
+      }
+    },
+    {
+      "question": "How do the time limits for downloading a finished export and recovering a deleted archive differ?",
+      "answerable": true,
+      "ground_truth": "A completed export link expires after 48 hours. A deleted archive stays in the recovery queue for 14 calendar days.",
+      "gold_sources": [
+        "export.md",
+        "retention.md"
+      ],
+      "contexts": [],
+      "system": "corrective",
+      "latency_s": 6.53116008406505,
+      "observability": {
+        "latency_s": 6.53116008406505,
+        "input_tokens": 560,
+        "output_tokens": 129,
+        "embedding_tokens": 18,
+        "total_tokens": 707,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "The time limit for downloading a finished export is 48 hours. [1] The time limit for recovering a deleted archive is 14 calendar days. [2]",
+        "citations": [
+          {
+            "source": "export.md",
+            "chunk": 1,
+            "text": "# Exports\n\nA workspace may run two exports concurrently. Completed export links expire after 48 hours. Generate a new export when a download link expires.",
+            "score": 0.8333334,
+            "label": 1
+          },
+          {
+            "source": "retention.md",
+            "chunk": 1,
+            "text": "# Archive recovery policy\n\nDeleted archives stay in the recovery queue for 14 calendar days. During that window, a workspace administrator can restore an archive from the Recovery tab. After the window closes, the service permanently removes the archived object.",
+            "score": 0.5833334,
+            "label": 2
+          }
+        ],
+        "abstained": false,
+        "rewrites": 0
+      },
+      "errors": {},
+      "outcome": "answered",
+      "rewrite_causes": [],
+      "metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9872565021107076,
+        "context_precision": 0.49999999995,
+        "context_recall": 1.0,
+        "answer_coverage": 1.0
+      }
+    },
+    {
+      "question": "Three days ago I deleted an archive and completed a separate export. What can I still restore or regenerate today?",
+      "answerable": true,
+      "ground_truth": "A workspace administrator can still restore the archive from the Recovery tab within 14 calendar days. The export link has passed its 48-hour lifetime, so generate a new export.",
+      "gold_sources": [
+        "retention.md",
+        "export.md"
+      ],
+      "contexts": [],
+      "system": "baseline",
+      "latency_s": 3.91905324999243,
+      "observability": {
+        "latency_s": 3.91905324999243,
+        "input_tokens": 331,
+        "output_tokens": 81,
+        "embedding_tokens": 23,
+        "total_tokens": 435,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "You can still restore the deleted archive today because it is within the 14-day recovery window. [1] You can regenerate a new export today because the previous one completed and its link has expired after 48 hours. [2]",
+        "citations": [
+          {
+            "source": "retention.md",
+            "chunk": 1,
+            "text": "# Archive recovery policy\n\nDeleted archives stay in the recovery queue for 14 calendar days. During that window, a workspace administrator can restore an archive from the Recovery tab. After the window closes, the service permanently removes the archived object.",
+            "score": 1.0,
+            "label": 1
+          },
+          {
+            "source": "export.md",
+            "chunk": 1,
+            "text": "# Exports\n\nA workspace may run two exports concurrently. Completed export links expire after 48 hours. Generate a new export when a download link expires.",
+            "score": 0.6666667,
+            "label": 2
+          }
+        ],
+        "abstained": false,
+        "rewrites": 0
+      },
+      "errors": {},
+      "outcome": "answered",
+      "rewrite_causes": [],
+      "metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.8543404191263974,
+        "context_precision": 0.99999999995,
+        "context_recall": 1.0,
+        "answer_coverage": 1.0
+      }
+    },
+    {
+      "question": "Three days ago I deleted an archive and completed a separate export. What can I still restore or regenerate today?",
+      "answerable": true,
+      "ground_truth": "A workspace administrator can still restore the archive from the Recovery tab within 14 calendar days. The export link has passed its 48-hour lifetime, so generate a new export.",
+      "gold_sources": [
+        "retention.md",
+        "export.md"
+      ],
+      "contexts": [],
+      "system": "corrective",
+      "latency_s": 11.961406624992378,
+      "observability": {
+        "latency_s": 11.961406624992378,
+        "input_tokens": 1430,
+        "output_tokens": 224,
+        "embedding_tokens": 45,
+        "total_tokens": 1699,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "You can still restore the deleted archive today because it is within the 14-day recovery window. [1]",
+        "citations": [
+          {
+            "source": "retention.md",
+            "chunk": 1,
+            "text": "# Archive recovery policy\n\nDeleted archives stay in the recovery queue for 14 calendar days. During that window, a workspace administrator can restore an archive from the Recovery tab. After the window closes, the service permanently removes the archived object.",
+            "score": 0.8333334,
+            "label": 1
+          }
+        ],
+        "abstained": false,
+        "rewrites": 2
+      },
+      "errors": {},
+      "outcome": "answered",
+      "rewrite_causes": [
+        "below_threshold",
+        "below_threshold"
+      ],
+      "metrics": {
+        "faithfulness": 0.5,
+        "answer_relevancy": 0.8543404191263974,
+        "context_precision": 0.9999999999,
+        "context_recall": 0.5,
+        "answer_coverage": 1.0
+      }
+    },
+    {
+      "question": "One operator sees ARC-17 and another sees ARC-42. Which one should wait, and which one needs to correct an upload?",
+      "answerable": true,
+      "ground_truth": "The operator seeing ARC-42 should wait for an active export to finish. For ARC-17, quarantine the upload, recompute the checksum from the original file, and submit a corrected manifest before retrying.",
+      "gold_sources": [
+        "errors.md"
+      ],
+      "contexts": [],
+      "system": "baseline",
+      "latency_s": 3.0183490839553997,
+      "observability": {
+        "latency_s": 3.0183490839553997,
+        "input_tokens": 338,
+        "output_tokens": 52,
+        "embedding_tokens": 30,
+        "total_tokens": 420,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "The operator seeing ARC-17 needs to correct an upload. [1] The operator seeing ARC-42 should wait. [1]",
+        "citations": [
+          {
+            "source": "errors.md",
+            "chunk": 1,
+            "text": "# Archive service error codes\n\nARC-17 means the archive checksum differs from the uploaded manifest. Quarantine the upload, recompute the checksum from the original file, and submit a corrected manifest before retrying.\n\nARC-42 means the account has reached its concurrent export limit. Wait for an active export to finish before starting another.",
+            "score": 1.0,
+            "label": 1
+          }
+        ],
+        "abstained": false,
+        "rewrites": 0
+      },
+      "errors": {},
+      "outcome": "answered",
+      "rewrite_causes": [],
+      "metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.7965585241353644,
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_coverage": 1.0
+      }
+    },
+    {
+      "question": "One operator sees ARC-17 and another sees ARC-42. Which one should wait, and which one needs to correct an upload?",
+      "answerable": true,
+      "ground_truth": "The operator seeing ARC-42 should wait for an active export to finish. For ARC-17, quarantine the upload, recompute the checksum from the original file, and submit a corrected manifest before retrying.",
+      "gold_sources": [
+        "errors.md"
+      ],
+      "contexts": [],
+      "system": "corrective",
+      "latency_s": 14.572727333987132,
+      "observability": {
+        "latency_s": 14.572727333987132,
+        "input_tokens": 1504,
+        "output_tokens": 268,
+        "embedding_tokens": 61,
+        "total_tokens": 1833,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "The operator seeing ARC-17 needs to correct an upload. [1] The operator seeing ARC-42 should wait. [1]",
+        "citations": [
+          {
+            "source": "errors.md",
+            "chunk": 1,
+            "text": "# Archive service error codes\n\nARC-17 means the archive checksum differs from the uploaded manifest. Quarantine the upload, recompute the checksum from the original file, and submit a corrected manifest before retrying.\n\nARC-42 means the account has reached its concurrent export limit. Wait for an active export to finish before starting another.",
+            "score": 1.0,
+            "label": 1
+          }
+        ],
+        "abstained": false,
+        "rewrites": 2
+      },
+      "errors": {},
+      "outcome": "answered",
+      "rewrite_causes": [
+        "below_threshold",
+        "below_threshold"
+      ],
+      "metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.7965585241353644,
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_coverage": 1.0
+      }
+    },
+    {
+      "question": "Which file should I use to recalculate the checksum for a quarantined upload, and what do I submit before retrying?",
+      "answerable": true,
+      "ground_truth": "Recompute the checksum from the original file and submit a corrected manifest before retrying the upload.",
+      "gold_sources": [
+        "errors.md"
+      ],
+      "contexts": [],
+      "system": "baseline",
+      "latency_s": 3.2351340419845656,
+      "observability": {
+        "latency_s": 3.2351340419845656,
+        "input_tokens": 335,
+        "output_tokens": 59,
+        "embedding_tokens": 27,
+        "total_tokens": 421,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "To recalculate the checksum for a quarantined upload, you should use the original file. [1] Before retrying, you must submit a corrected manifest. [1]",
+        "citations": [
+          {
+            "source": "errors.md",
+            "chunk": 1,
+            "text": "# Archive service error codes\n\nARC-17 means the archive checksum differs from the uploaded manifest. Quarantine the upload, recompute the checksum from the original file, and submit a corrected manifest before retrying.\n\nARC-42 means the account has reached its concurrent export limit. Wait for an active export to finish before starting another.",
+            "score": 1.0,
+            "label": 1
+          }
+        ],
+        "abstained": false,
+        "rewrites": 0
+      },
+      "errors": {},
+      "outcome": "answered",
+      "rewrite_causes": [],
+      "metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9386158284134577,
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_coverage": 1.0
+      }
+    },
+    {
+      "question": "Which file should I use to recalculate the checksum for a quarantined upload, and what do I submit before retrying?",
+      "answerable": true,
+      "ground_truth": "Recompute the checksum from the original file and submit a corrected manifest before retrying the upload.",
+      "gold_sources": [
+        "errors.md"
+      ],
+      "contexts": [],
+      "system": "corrective",
+      "latency_s": 11.268794957897626,
+      "observability": {
+        "latency_s": 11.268794957897626,
+        "input_tokens": 1481,
+        "output_tokens": 219,
+        "embedding_tokens": 53,
+        "total_tokens": 1753,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "Use the original file to recalculate the checksum, and submit a corrected manifest before retrying. [1]",
+        "citations": [
+          {
+            "source": "errors.md",
+            "chunk": 1,
+            "text": "# Archive service error codes\n\nARC-17 means the archive checksum differs from the uploaded manifest. Quarantine the upload, recompute the checksum from the original file, and submit a corrected manifest before retrying.\n\nARC-42 means the account has reached its concurrent export limit. Wait for an active export to finish before starting another.",
+            "score": 1.0,
+            "label": 1
+          }
+        ],
+        "abstained": false,
+        "rewrites": 2
+      },
+      "errors": {},
+      "outcome": "answered",
+      "rewrite_causes": [
+        "below_threshold",
+        "below_threshold"
+      ],
+      "metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.7003459048305419,
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_coverage": 1.0
+      }
+    },
+    {
+      "question": "We have one export running. How many additional exports can we start concurrently, and how long will completed links last?",
+      "answerable": true,
+      "ground_truth": "One additional export can start because the workspace limit is two concurrent exports. Completed export links expire after 48 hours.",
+      "gold_sources": [
+        "export.md"
+      ],
+      "contexts": [],
+      "system": "baseline",
+      "latency_s": 3.6318290419876575,
+      "observability": {
+        "latency_s": 3.6318290419876575,
+        "input_tokens": 332,
+        "output_tokens": 72,
+        "embedding_tokens": 24,
+        "total_tokens": 428,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "We can start one additional export concurrently. [1] Completed links last for 48 hours. [1]",
+        "citations": [
+          {
+            "source": "export.md",
+            "chunk": 1,
+            "text": "# Exports\n\nA workspace may run two exports concurrently. Completed export links expire after 48 hours. Generate a new export when a download link expires.",
+            "score": 1.0,
+            "label": 1
+          }
+        ],
+        "abstained": false,
+        "rewrites": 0
+      },
+      "errors": {},
+      "outcome": "answered",
+      "rewrite_causes": [],
+      "metrics": {
+        "faithfulness": 0.5,
+        "answer_relevancy": 0.9277653309665693,
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_coverage": 1.0
+      }
+    },
+    {
+      "question": "We have one export running. How many additional exports can we start concurrently, and how long will completed links last?",
+      "answerable": true,
+      "ground_truth": "One additional export can start because the workspace limit is two concurrent exports. Completed export links expire after 48 hours.",
+      "gold_sources": [
+        "export.md"
+      ],
+      "contexts": [],
+      "system": "corrective",
+      "latency_s": 15.190032708924264,
+      "observability": {
+        "latency_s": 15.190032708924264,
+        "input_tokens": 1429,
+        "output_tokens": 303,
+        "embedding_tokens": 64,
+        "total_tokens": 1796,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "We can start one additional export concurrently, for a total of two concurrent exports. [1] Completed links last for 48 hours before expiring. [1]",
+        "citations": [
+          {
+            "source": "export.md",
+            "chunk": 1,
+            "text": "# Exports\n\nA workspace may run two exports concurrently. Completed export links expire after 48 hours. Generate a new export when a download link expires.",
+            "score": 1.0,
+            "label": 1
+          }
+        ],
+        "abstained": false,
+        "rewrites": 2
+      },
+      "errors": {},
+      "outcome": "answered",
+      "rewrite_causes": [
+        "below_threshold",
+        "below_threshold"
+      ],
+      "metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9277653309665693,
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_coverage": 1.0
+      }
+    },
+    {
+      "question": "An active export finishes while another is still running. Must I wait for its download link to expire before replacing the finished job?",
+      "answerable": true,
+      "ground_truth": "No. The concurrent limit applies to running exports. Once an active export finishes, another can start. The completed link's 48-hour lifetime is separate.",
+      "gold_sources": [
+        "errors.md",
+        "export.md"
+      ],
+      "contexts": [],
+      "system": "baseline",
+      "latency_s": 5.066516624996439,
+      "observability": {
+        "latency_s": 5.066516624996439,
+        "input_tokens": 334,
+        "output_tokens": 105,
+        "embedding_tokens": 26,
+        "total_tokens": 465,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "A workspace may run two exports concurrently. [1] Completed export links expire after 48 hours. [1] Generate a new export when a download link expires. [1]",
+        "citations": [
+          {
+            "source": "export.md",
+            "chunk": 1,
+            "text": "# Exports\n\nA workspace may run two exports concurrently. Completed export links expire after 48 hours. Generate a new export when a download link expires.",
+            "score": 1.0,
+            "label": 1
+          }
+        ],
+        "abstained": false,
+        "rewrites": 0
+      },
+      "errors": {},
+      "outcome": "answered",
+      "rewrite_causes": [],
+      "metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.6781058931521887,
+        "context_precision": 0.99999999995,
+        "context_recall": 0.8333333333333334,
+        "answer_coverage": 1.0
+      }
+    },
+    {
+      "question": "An active export finishes while another is still running. Must I wait for its download link to expire before replacing the finished job?",
+      "answerable": true,
+      "ground_truth": "No. The concurrent limit applies to running exports. Once an active export finishes, another can start. The completed link's 48-hour lifetime is separate.",
+      "gold_sources": [
+        "errors.md",
+        "export.md"
+      ],
+      "contexts": [],
+      "system": "corrective",
+      "latency_s": 20.540287083014846,
+      "observability": {
+        "latency_s": 20.540287083014846,
+        "input_tokens": 1440,
+        "output_tokens": 415,
+        "embedding_tokens": 60,
+        "total_tokens": 1915,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "A workspace may run two exports concurrently. [1] Completed export links expire after 48 hours. [1] Generate a new export when a download link expires. [1]",
+        "citations": [
+          {
+            "source": "export.md",
+            "chunk": 1,
+            "text": "# Exports\n\nA workspace may run two exports concurrently. Completed export links expire after 48 hours. Generate a new export when a download link expires.",
+            "score": 1.0,
+            "label": 1
+          }
+        ],
+        "abstained": false,
+        "rewrites": 2
+      },
+      "errors": {},
+      "outcome": "answered",
+      "rewrite_causes": [
+        "below_threshold",
+        "below_threshold"
+      ],
+      "metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.6781058931521887,
+        "context_precision": 0.9999999999,
+        "context_recall": 0.8333333333333334,
+        "answer_coverage": 1.0
+      }
+    },
+    {
+      "question": "What is the enterprise subscription price?",
+      "answerable": false,
+      "ground_truth": "",
+      "gold_sources": [],
+      "contexts": [],
+      "system": "baseline",
+      "latency_s": 0.7031769159948453,
+      "observability": {
+        "latency_s": 0.7031769159948453,
+        "input_tokens": 316,
+        "output_tokens": 6,
+        "embedding_tokens": 8,
+        "total_tokens": 330,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "The indexed documents provide insufficient evidence to answer.",
+        "citations": [],
+        "abstained": true,
+        "rewrites": 0
+      },
+      "errors": {},
+      "outcome": "correct_abstention",
+      "rewrite_causes": [],
+      "metrics": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "context_precision": null,
+        "context_recall": null,
+        "answer_coverage": null
+      }
+    },
+    {
+      "question": "What is the enterprise subscription price?",
+      "answerable": false,
+      "ground_truth": "",
+      "gold_sources": [],
+      "contexts": [],
+      "system": "corrective",
+      "latency_s": 549.2637332091108,
+      "observability": {
+        "latency_s": 549.2637332091108,
+        "input_tokens": null,
+        "output_tokens": null,
+        "embedding_tokens": 24,
+        "total_tokens": null,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": null,
+      "errors": {
+        "generation": "OpenAITimeoutError"
+      },
+      "outcome": null,
+      "rewrite_causes": [
+        "zero_relevant"
+      ],
+      "metrics": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "context_precision": null,
+        "context_recall": null,
+        "answer_coverage": null
+      }
+    },
+    {
+      "question": "What does error ARC-99 mean?",
+      "answerable": false,
+      "ground_truth": "",
+      "gold_sources": [],
+      "contexts": [],
+      "system": "baseline",
+      "latency_s": 6.8629352080170065,
+      "observability": {
+        "latency_s": 6.8629352080170065,
+        "input_tokens": 318,
+        "output_tokens": 32,
+        "embedding_tokens": 10,
+        "total_tokens": 360,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "The indexed documents provide insufficient evidence to answer.",
+        "citations": [],
+        "abstained": true,
+        "rewrites": 0
+      },
+      "errors": {},
+      "outcome": "correct_abstention",
+      "rewrite_causes": [],
+      "metrics": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "context_precision": null,
+        "context_recall": null,
+        "answer_coverage": null
+      }
+    },
+    {
+      "question": "What does error ARC-99 mean?",
+      "answerable": false,
+      "ground_truth": "",
+      "gold_sources": [],
+      "contexts": [],
+      "system": "corrective",
+      "latency_s": 15.126622707932256,
+      "observability": {
+        "latency_s": 15.126622707932256,
+        "input_tokens": 1189,
+        "output_tokens": 316,
+        "embedding_tokens": 68,
+        "total_tokens": 1573,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "The indexed documents provide insufficient evidence to answer.",
+        "citations": [],
+        "abstained": true,
+        "rewrites": 2
+      },
+      "errors": {},
+      "outcome": "correct_abstention",
+      "rewrite_causes": [
+        "zero_relevant",
+        "zero_relevant"
+      ],
+      "metrics": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "context_precision": null,
+        "context_recall": null,
+        "answer_coverage": null
+      }
+    },
+    {
+      "question": "How much does an additional concurrent export slot cost?",
+      "answerable": false,
+      "ground_truth": "",
+      "gold_sources": [],
+      "contexts": [],
+      "system": "baseline",
+      "latency_s": 2.3393470409791917,
+      "observability": {
+        "latency_s": 2.3393470409791917,
+        "input_tokens": 319,
+        "output_tokens": 41,
+        "embedding_tokens": 11,
+        "total_tokens": 371,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "An additional concurrent export slot costs nothing. [1]",
+        "citations": [
+          {
+            "source": "export.md",
+            "chunk": 1,
+            "text": "# Exports\n\nA workspace may run two exports concurrently. Completed export links expire after 48 hours. Generate a new export when a download link expires.",
+            "score": 1.0,
+            "label": 1
+          }
+        ],
+        "abstained": false,
+        "rewrites": 0
+      },
+      "errors": {},
+      "outcome": "hallucination",
+      "rewrite_causes": [],
+      "metrics": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "context_precision": null,
+        "context_recall": null,
+        "answer_coverage": null
+      }
+    },
+    {
+      "question": "How much does an additional concurrent export slot cost?",
+      "answerable": false,
+      "ground_truth": "",
+      "gold_sources": [],
+      "contexts": [],
+      "system": "corrective",
+      "latency_s": 545.6900190830929,
+      "observability": {
+        "latency_s": 545.6900190830929,
+        "input_tokens": null,
+        "output_tokens": null,
+        "embedding_tokens": 11,
+        "total_tokens": null,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": null,
+      "errors": {
+        "generation": "OpenAITimeoutError"
+      },
+      "outcome": null,
+      "rewrite_causes": [],
+      "metrics": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "context_precision": null,
+        "context_recall": null,
+        "answer_coverage": null
+      }
+    },
+    {
+      "question": "Can a workspace administrator extend the 14-day recovery window?",
+      "answerable": false,
+      "ground_truth": "",
+      "gold_sources": [],
+      "contexts": [],
+      "system": "baseline",
+      "latency_s": 4.276864374987781,
+      "observability": {
+        "latency_s": 4.276864374987781,
+        "input_tokens": 322,
+        "output_tokens": 51,
+        "embedding_tokens": 14,
+        "total_tokens": 387,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "No, a workspace administrator cannot extend the 14-day recovery window because after the window closes, the service permanently removes the archived object. [1]",
+        "citations": [
+          {
+            "source": "retention.md",
+            "chunk": 1,
+            "text": "# Archive recovery policy\n\nDeleted archives stay in the recovery queue for 14 calendar days. During that window, a workspace administrator can restore an archive from the Recovery tab. After the window closes, the service permanently removes the archived object.",
+            "score": 1.0,
+            "label": 1
+          }
+        ],
+        "abstained": false,
+        "rewrites": 0
+      },
+      "errors": {},
+      "outcome": "hallucination",
+      "rewrite_causes": [],
+      "metrics": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "context_precision": null,
+        "context_recall": null,
+        "answer_coverage": null
+      }
+    },
+    {
+      "question": "Can a workspace administrator extend the 14-day recovery window?",
+      "answerable": false,
+      "ground_truth": "",
+      "gold_sources": [],
+      "contexts": [],
+      "system": "corrective",
+      "latency_s": 18.164848666987382,
+      "observability": {
+        "latency_s": 18.164848666987382,
+        "input_tokens": 1373,
+        "output_tokens": 363,
+        "embedding_tokens": 59,
+        "total_tokens": 1795,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "A workspace administrator cannot extend the 14-day recovery window. [1]",
+        "citations": [
+          {
+            "source": "retention.md",
+            "chunk": 1,
+            "text": "# Archive recovery policy\n\nDeleted archives stay in the recovery queue for 14 calendar days. During that window, a workspace administrator can restore an archive from the Recovery tab. After the window closes, the service permanently removes the archived object.",
+            "score": 1.0,
+            "label": 1
+          }
+        ],
+        "abstained": false,
+        "rewrites": 2
+      },
+      "errors": {},
+      "outcome": "hallucination",
+      "rewrite_causes": [
+        "below_threshold",
+        "below_threshold"
+      ],
+      "metrics": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "context_precision": null,
+        "context_recall": null,
+        "answer_coverage": null
+      }
+    },
+    {
+      "question": "How many exports can a workspace run per day?",
+      "answerable": false,
+      "ground_truth": "",
+      "gold_sources": [],
+      "contexts": [],
+      "system": "baseline",
+      "latency_s": 2.344177875085734,
+      "observability": {
+        "latency_s": 2.344177875085734,
+        "input_tokens": 319,
+        "output_tokens": 41,
+        "embedding_tokens": 11,
+        "total_tokens": 371,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "A workspace may run two exports concurrently. [1]",
+        "citations": [
+          {
+            "source": "export.md",
+            "chunk": 1,
+            "text": "# Exports\n\nA workspace may run two exports concurrently. Completed export links expire after 48 hours. Generate a new export when a download link expires.",
+            "score": 1.0,
+            "label": 1
+          }
+        ],
+        "abstained": false,
+        "rewrites": 0
+      },
+      "errors": {},
+      "outcome": "hallucination",
+      "rewrite_causes": [],
+      "metrics": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "context_precision": null,
+        "context_recall": null,
+        "answer_coverage": null
+      }
+    },
+    {
+      "question": "How many exports can a workspace run per day?",
+      "answerable": false,
+      "ground_truth": "",
+      "gold_sources": [],
+      "contexts": [],
+      "system": "corrective",
+      "latency_s": 14.804413500009105,
+      "observability": {
+        "latency_s": 14.804413500009105,
+        "input_tokens": 1330,
+        "output_tokens": 290,
+        "embedding_tokens": 56,
+        "total_tokens": 1676,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "A workspace can run two exports concurrently. [1]",
+        "citations": [
+          {
+            "source": "export.md",
+            "chunk": 1,
+            "text": "# Exports\n\nA workspace may run two exports concurrently. Completed export links expire after 48 hours. Generate a new export when a download link expires.",
+            "score": 1.0,
+            "label": 1
+          }
+        ],
+        "abstained": false,
+        "rewrites": 2
+      },
+      "errors": {},
+      "outcome": "hallucination",
+      "rewrite_causes": [
+        "below_threshold",
+        "below_threshold"
+      ],
+      "metrics": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "context_precision": null,
+        "context_recall": null,
+        "answer_coverage": null
+      }
+    },
+    {
+      "question": "Which file formats can an export be downloaded in?",
+      "answerable": false,
+      "ground_truth": "",
+      "gold_sources": [],
+      "contexts": [],
+      "system": "baseline",
+      "latency_s": 2.826241667033173,
+      "observability": {
+        "latency_s": 2.826241667033173,
+        "input_tokens": 319,
+        "output_tokens": 47,
+        "embedding_tokens": 11,
+        "total_tokens": 377,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "The indexed documents provide insufficient evidence to answer.",
+        "citations": [],
+        "abstained": true,
+        "rewrites": 0
+      },
+      "errors": {},
+      "outcome": "correct_abstention",
+      "rewrite_causes": [],
+      "metrics": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "context_precision": null,
+        "context_recall": null,
+        "answer_coverage": null
+      }
+    },
+    {
+      "question": "Which file formats can an export be downloaded in?",
+      "answerable": false,
+      "ground_truth": "",
+      "gold_sources": [],
+      "contexts": [],
+      "system": "corrective",
+      "latency_s": 13.527314250008203,
+      "observability": {
+        "latency_s": 13.527314250008203,
+        "input_tokens": 1181,
+        "output_tokens": 280,
+        "embedding_tokens": 41,
+        "total_tokens": 1502,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "The indexed documents provide insufficient evidence to answer.",
+        "citations": [],
+        "abstained": true,
+        "rewrites": 2
+      },
+      "errors": {},
+      "outcome": "correct_abstention",
+      "rewrite_causes": [
+        "zero_relevant",
+        "zero_relevant"
+      ],
+      "metrics": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "context_precision": null,
+        "context_recall": null,
+        "answer_coverage": null
+      }
+    },
+    {
+      "question": "What is the maximum size of an archive upload?",
+      "answerable": false,
+      "ground_truth": "",
+      "gold_sources": [],
+      "contexts": [],
+      "system": "baseline",
+      "latency_s": 2.7010585840325803,
+      "observability": {
+        "latency_s": 2.7010585840325803,
+        "input_tokens": 319,
+        "output_tokens": 47,
+        "embedding_tokens": 11,
+        "total_tokens": 377,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "The indexed documents provide insufficient evidence to answer.",
+        "citations": [],
+        "abstained": true,
+        "rewrites": 0
+      },
+      "errors": {},
+      "outcome": "correct_abstention",
+      "rewrite_causes": [],
+      "metrics": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "context_precision": null,
+        "context_recall": null,
+        "answer_coverage": null
+      }
+    },
+    {
+      "question": "What is the maximum size of an archive upload?",
+      "answerable": false,
+      "ground_truth": "",
+      "gold_sources": [],
+      "contexts": [],
+      "system": "corrective",
+      "latency_s": 14.674097374896519,
+      "observability": {
+        "latency_s": 14.674097374896519,
+        "input_tokens": 1174,
+        "output_tokens": 297,
+        "embedding_tokens": 38,
+        "total_tokens": 1509,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "The indexed documents provide insufficient evidence to answer.",
+        "citations": [],
+        "abstained": true,
+        "rewrites": 2
+      },
+      "errors": {},
+      "outcome": "correct_abstention",
+      "rewrite_causes": [
+        "zero_relevant",
+        "zero_relevant"
+      ],
+      "metrics": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "context_precision": null,
+        "context_recall": null,
+        "answer_coverage": null
+      }
+    },
+    {
+      "question": "Does restoring an archive reset its 14-day retention clock?",
+      "answerable": false,
+      "ground_truth": "",
+      "gold_sources": [],
+      "contexts": [],
+      "system": "baseline",
+      "latency_s": 3.9160515420371667,
+      "observability": {
+        "latency_s": 3.9160515420371667,
+        "input_tokens": 322,
+        "output_tokens": 75,
+        "embedding_tokens": 14,
+        "total_tokens": 411,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "Restoring an archive resets the 14-day retention clock because deleted archives stay in the recovery queue for 14 calendar days and a workspace administrator can restore an archive from the Recovery tab during that window. [1]",
+        "citations": [
+          {
+            "source": "retention.md",
+            "chunk": 1,
+            "text": "# Archive recovery policy\n\nDeleted archives stay in the recovery queue for 14 calendar days. During that window, a workspace administrator can restore an archive from the Recovery tab. After the window closes, the service permanently removes the archived object.",
+            "score": 1.0,
+            "label": 1
+          }
+        ],
+        "abstained": false,
+        "rewrites": 0
+      },
+      "errors": {},
+      "outcome": "hallucination",
+      "rewrite_causes": [],
+      "metrics": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "context_precision": null,
+        "context_recall": null,
+        "answer_coverage": null
+      }
+    },
+    {
+      "question": "Does restoring an archive reset its 14-day retention clock?",
+      "answerable": false,
+      "ground_truth": "",
+      "gold_sources": [],
+      "contexts": [],
+      "system": "corrective",
+      "latency_s": 16.429717167047784,
+      "observability": {
+        "latency_s": 16.429717167047784,
+        "input_tokens": 1368,
+        "output_tokens": 319,
+        "embedding_tokens": 38,
+        "total_tokens": 1725,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "Restoring an archive resets its 14-day retention clock. [1]",
+        "citations": [
+          {
+            "source": "retention.md",
+            "chunk": 1,
+            "text": "# Archive recovery policy\n\nDeleted archives stay in the recovery queue for 14 calendar days. During that window, a workspace administrator can restore an archive from the Recovery tab. After the window closes, the service permanently removes the archived object.",
+            "score": 0.8333334,
+            "label": 1
+          }
+        ],
+        "abstained": false,
+        "rewrites": 2
+      },
+      "errors": {},
+      "outcome": "hallucination",
+      "rewrite_causes": [
+        "below_threshold",
+        "below_threshold"
+      ],
+      "metrics": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "context_precision": null,
+        "context_recall": null,
+        "answer_coverage": null
+      }
+    },
+    {
+      "question": "How long do export links stay valid for enterprise accounts?",
+      "answerable": false,
+      "ground_truth": "",
+      "gold_sources": [],
+      "contexts": [],
+      "system": "baseline",
+      "latency_s": 2.6085988340200856,
+      "observability": {
+        "latency_s": 2.6085988340200856,
+        "input_tokens": 320,
+        "output_tokens": 42,
+        "embedding_tokens": 12,
+        "total_tokens": 374,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "Export links expire after 48 hours. [1]",
+        "citations": [
+          {
+            "source": "export.md",
+            "chunk": 1,
+            "text": "# Exports\n\nA workspace may run two exports concurrently. Completed export links expire after 48 hours. Generate a new export when a download link expires.",
+            "score": 1.0,
+            "label": 1
+          }
+        ],
+        "abstained": false,
+        "rewrites": 0
+      },
+      "errors": {},
+      "outcome": "hallucination",
+      "rewrite_causes": [],
+      "metrics": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "context_precision": null,
+        "context_recall": null,
+        "answer_coverage": null
+      }
+    },
+    {
+      "question": "How long do export links stay valid for enterprise accounts?",
+      "answerable": false,
+      "ground_truth": "",
+      "gold_sources": [],
+      "contexts": [],
+      "system": "corrective",
+      "latency_s": 16.803177959052846,
+      "observability": {
+        "latency_s": 16.803177959052846,
+        "input_tokens": 1339,
+        "output_tokens": 337,
+        "embedding_tokens": 40,
+        "total_tokens": 1716,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "Export links for enterprise accounts stay valid for 48 hours. [1]",
+        "citations": [
+          {
+            "source": "export.md",
+            "chunk": 1,
+            "text": "# Exports\n\nA workspace may run two exports concurrently. Completed export links expire after 48 hours. Generate a new export when a download link expires.",
+            "score": 1.0,
+            "label": 1
+          }
+        ],
+        "abstained": false,
+        "rewrites": 2
+      },
+      "errors": {},
+      "outcome": "hallucination",
+      "rewrite_causes": [
+        "below_threshold",
+        "below_threshold"
+      ],
+      "metrics": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "context_precision": null,
+        "context_recall": null,
+        "answer_coverage": null
+      }
+    },
+    {
+      "question": "Which support phone number should I call when I see ARC-42?",
+      "answerable": false,
+      "ground_truth": "",
+      "gold_sources": [],
+      "contexts": [],
+      "system": "baseline",
+      "latency_s": 2.3006675409851596,
+      "observability": {
+        "latency_s": 2.3006675409851596,
+        "input_tokens": 324,
+        "output_tokens": 40,
+        "embedding_tokens": 16,
+        "total_tokens": 380,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "There is no support phone number mentioned in the provided passages for ARC-42. [1] [2] [3]",
+        "citations": [
+          {
+            "source": "errors.md",
+            "chunk": 1,
+            "text": "# Archive service error codes\n\nARC-17 means the archive checksum differs from the uploaded manifest. Quarantine the upload, recompute the checksum from the original file, and submit a corrected manifest before retrying.\n\nARC-42 means the account has reached its concurrent export limit. Wait for an active export to finish before starting another.",
+            "score": 1.0,
+            "label": 1
+          },
+          {
+            "source": "export.md",
+            "chunk": 1,
+            "text": "# Exports\n\nA workspace may run two exports concurrently. Completed export links expire after 48 hours. Generate a new export when a download link expires.",
+            "score": 0.33333334,
+            "label": 2
+          },
+          {
+            "source": "retention.md",
+            "chunk": 1,
+            "text": "# Archive recovery policy\n\nDeleted archives stay in the recovery queue for 14 calendar days. During that window, a workspace administrator can restore an archive from the Recovery tab. After the window closes, the service permanently removes the archived object.",
+            "score": 0.25,
+            "label": 3
+          }
+        ],
+        "abstained": false,
+        "rewrites": 0
+      },
+      "errors": {},
+      "outcome": "hallucination",
+      "rewrite_causes": [],
+      "metrics": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "context_precision": null,
+        "context_recall": null,
+        "answer_coverage": null
+      }
+    },
+    {
+      "question": "Which support phone number should I call when I see ARC-42?",
+      "answerable": false,
+      "ground_truth": "",
+      "gold_sources": [],
+      "contexts": [],
+      "system": "corrective",
+      "latency_s": 17.298185541993007,
+      "observability": {
+        "latency_s": 17.298185541993007,
+        "input_tokens": 1412,
+        "output_tokens": 340,
+        "embedding_tokens": 58,
+        "total_tokens": 1810,
+        "estimated_cost_usd": 0.0,
+        "trace_id": null,
+        "trace_url": null
+      },
+      "answer": {
+        "answer": "You should wait for an active export to finish before starting another when you see ARC-42. [1]",
+        "citations": [
+          {
+            "source": "errors.md",
+            "chunk": 1,
+            "text": "# Archive service error codes\n\nARC-17 means the archive checksum differs from the uploaded manifest. Quarantine the upload, recompute the checksum from the original file, and submit a corrected manifest before retrying.\n\nARC-42 means the account has reached its concurrent export limit. Wait for an active export to finish before starting another.",
+            "score": 1.0,
+            "label": 1
+          }
+        ],
+        "abstained": false,
+        "rewrites": 2
+      },
+      "errors": {},
+      "outcome": "hallucination",
+      "rewrite_causes": [
+        "below_threshold",
+        "below_threshold"
+      ],
+      "metrics": {
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "context_precision": null,
+        "context_recall": null,
+        "answer_coverage": null
+      }
+    }
+  ]
+}

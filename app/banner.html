@@ -1,0 +1,27 @@
+<style>
+.rag-banner {display:flex;align-items:center;justify-content:space-between;gap:2rem;
+  padding:clamp(1.4rem,3vw,2.8rem);margin-bottom:.6rem;border-radius:1rem;
+  background:#113c38;color:#f4f6ed}
+.rag-banner h1 {color:inherit;font:500 clamp(2rem,4vw,3.4rem)/1.08 Georgia,serif;
+  letter-spacing:-.045em;margin:.45rem 0 .7rem;padding:0}
+.rag-banner p {color:#d7e8df;max-width:47ch;line-height:1.5;margin:0}
+.rag-banner small {font:600 .72rem/1.4 ui-monospace,monospace;letter-spacing:.12em;color:#b2e3b9}
+ .rag-flow {flex:none;display:grid;grid-template-columns:auto 2rem auto 2rem auto;
+  align-items:center;text-align:center;font:500 .85rem/1.4 system-ui,sans-serif}
+.rag-node {padding:.5rem .7rem;border:1px solid #79a99b;border-radius:.5rem;background:#194741}
+.rag-arrow,.rag-loop {color:#b2e3b9}
+.rag-loop {grid-column:1/4;justify-self:center;width:64%;padding-top:.3rem;
+  border:1px dashed #89ba9e;border-top:0;border-radius:0 0 .4rem .4rem;font-size:.75rem}
+@media(max-width:850px){.rag-banner{flex-wrap:wrap;gap:1rem}}
+@media(max-width:520px){.rag-flow{grid-template-columns:auto 1.2rem auto 1.2rem auto}.rag-node{padding:.35rem .45rem}}
+.st-key-run_metrics [data-testid="stMetricValue"] {font-size:clamp(1rem,1.6vw,1.55rem);font-variant-numeric:tabular-nums}
+</style>
+<header class="rag-banner">
+  <div><small>AGENTIC CORRECTIVE RAG</small><h1>Consulte o runbook</h1>
+    <p>Confira a resposta nas fontes e acompanhe como o agente refina a busca quando faltam evidências.</p></div>
+  <div class="rag-flow" role="img" aria-label="Busca e avaliação. Evidências suficientes permitem responder. Caso contrário, o agente pode reescrever a consulta e buscar novamente.">
+    <span class="rag-node">Busca</span><span class="rag-arrow">→</span>
+    <span class="rag-node">Grading</span><span class="rag-arrow">→</span>
+    <span class="rag-node">Resposta</span><span class="rag-loop">↶ Reescrita</span>
+  </div>
+</header>

@@ -1,0 +1,229 @@
+{
+  "$defs": {
+    "Citation": {
+      "properties": {
+        "chunk": {
+          "minimum": 1,
+          "title": "Chunk",
+          "type": "integer"
+        },
+        "label": {
+          "title": "Label",
+          "type": "integer"
+        },
+        "score": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Qdrant reciprocal rank fusion score.",
+          "title": "Score"
+        },
+        "source": {
+          "title": "Source",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source",
+        "chunk",
+        "text",
+        "label"
+      ],
+      "title": "Citation",
+      "type": "object"
+    },
+    "QueryMetrics": {
+      "properties": {
+        "embedding_tokens": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Embedding Tokens"
+        },
+        "estimated_cost_usd": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Estimated Cost Usd"
+        },
+        "input_tokens": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Input Tokens"
+        },
+        "latency_s": {
+          "title": "Latency S",
+          "type": "number"
+        },
+        "output_tokens": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Output Tokens"
+        },
+        "total_tokens": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Total Tokens"
+        },
+        "trace_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Trace Id"
+        },
+        "trace_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Trace Url"
+        }
+      },
+      "required": [
+        "latency_s",
+        "input_tokens",
+        "output_tokens",
+        "embedding_tokens",
+        "total_tokens",
+        "estimated_cost_usd"
+      ],
+      "title": "QueryMetrics",
+      "type": "object"
+    },
+    "RunInspection": {
+      "properties": {
+        "state": {
+          "additionalProperties": true,
+          "title": "State",
+          "type": "object"
+        },
+        "steps": {
+          "items": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "title": "Steps",
+          "type": "array"
+        }
+      },
+      "required": [
+        "steps",
+        "state"
+      ],
+      "title": "RunInspection",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "abstained": {
+      "title": "Abstained",
+      "type": "boolean"
+    },
+    "answer": {
+      "title": "Answer",
+      "type": "string"
+    },
+    "citations": {
+      "items": {
+        "$ref": "#/$defs/Citation"
+      },
+      "title": "Citations",
+      "type": "array"
+    },
+    "feedback_token": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Feedback Token"
+    },
+    "inspection": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/RunInspection"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "observability": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/QueryMetrics"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "rewrites": {
+      "title": "Rewrites",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "answer",
+    "citations",
+    "abstained",
+    "rewrites"
+  ],
+  "title": "QueryResponse",
+  "type": "object"
+}

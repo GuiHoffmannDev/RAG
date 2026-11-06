@@ -1,0 +1,19 @@
+model_provider = "openai"
+additional_chat_models = ""
+ollama_url = "http://localhost:11434"
+chat_model = "gpt-4o-mini"
+embedding_model = "text-embedding-3-small"
+qdrant_url = "http://localhost:6333"
+collection = "runbook"
+candidate_depth = 12
+top_k = 4
+max_rewrites = 2
+grade_rule = "majority"
+grader_prompt = "v1"
+chunk_size = 1200
+chunk_overlap = 200
+
+[ollama]
+chat_model = "qwen3.5:4b"
+embedding_model = "qwen3-embedding:0.6b"
+collection = "runbook_ollama"
